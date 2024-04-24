@@ -1,0 +1,70 @@
+		INSTALLATION MySQL
+	-Telechargement de mysql-8.3.0.tar.gz sur le site officiel de MySQL
+	-Extraction de "mysql-8.3.0.tar.gz": 
+				$ tar -zxvf mysql-8.3.0.tar.gz
+
+	-Entrer dans le repertoire mysql-8.3.0:
+				$cd mysql-8.3.0/ 
+
+	-Installation:
+				$sudo su root
+		-Pre-configuration:
+				$groupadd mysql
+				$useradd -r -g mysql -s /bin/false mysql
+		-Configuration: 
+				$./configure   
+			-Erreur d'absence du fichier "configure"
+			-Installation de "cmake": 
+				$apt install cmake
+			-Configuration avec cmake:     
+				$mkdir bld ; cd bld
+			-Telechargement des dependances:
+				$apt install libboost-dev  libncurse-dev bison openssl libssl-dev libsals-dev
+				$cmake ..  	
+		-Compilation et Installation
+				$make 
+			-Erreur : clocks skew detected; Installation de:
+				$apt install ntp
+				$systemctl start ntp
+			-Recompilation:
+				$make
+				$make install
+		-Post-configuration:
+				$cd /usr/local/mysql
+				$mkdir mysql-files
+				$chown mysql:mysql mysql-files
+				$bin/mysql_ssl_rsa_setup
+				$bin/mysql_safe --user=mysql &
+				
+	
+		INSTALLATION Apache
+-Telechargement de "httpd-2.4.59.tar.gz" sur le site officiel apache
+-Extraction de "httpd-2.4.59.tar.gz": 
+			$ tar -zxvf httpd-2.4.59.tar.gz
+-Entrer dans le repertoire httpd-2.4.59:
+			$cd httpd-2.4.59/ 
+-Installation:
+			$sudo su root
+			$./configure
+		-Erreur: APR , APR  UTIL, PCRE ,libtool ,expat .h  not found
+			$apt install   libapr1-dev   libaprutil1-dev   libpcre-dev  libtool-dev  libexpat-dev
+			$./configure 
+			$make
+			$make install
+		
+
+		INSTALLATION PhP
+-Telechargement de "php-8.3.6.tar.gz" sur le site officiel PhP
+-Extraction de "php-8.3.6.tar.gz": 
+			$ tar -zxvf php-8.3.6.tar.gz
+-Entrer dans le repertoire php-8.3.6:
+			$cd php-8.3.6/ 
+-Installation:
+			$sudo su root
+			$./configure
+		-Erreur: libxml2, sqlite3  not found
+			$apt install   libxml2-dev sqlite3
+			$./configure 
+			$make
+			$make install
+			
